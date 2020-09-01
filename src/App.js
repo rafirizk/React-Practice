@@ -84,7 +84,7 @@ class App extends React.Component {
           <input className="form-control input" type="text" placeholder="Masukkan Nama" ref={this.nameref} />  
         </div>
         <div>
-          <input className="form-control input" type="text" placeholder="Masukkan Usia" ref={this.usiaref} />  
+          <input className="form-control input" type="number" placeholder="Masukkan Usia" ref={this.usiaref} />  
         </div>
         <button className="btn btn-primary" onClick={this.addStundentData}>Submit</button>  
         <table className="table table-striped">
