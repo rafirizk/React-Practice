@@ -13,11 +13,9 @@ class App extends React.Component {
   }
   nameref = createRef()
   usiaref = createRef()
-  changenameref = createRef()
-  changeusiaref = createRef()
 
   deleteStudentData = (id) => {
-    const student = [...this.state.studentData]
+    let student = [...this.state.studentData]
     student.splice(id, 1)
     this.setState({studentData:student})
   }
@@ -31,20 +29,32 @@ class App extends React.Component {
     })
   }
 
-  changeName = (event, id) => {
-    let student = {...this.state.studentData[id]}
-    student.name = event.target.value
-    let studentdata = [...this.state.studentData]
-    studentdata[id] = student
-    this.setState({studentData: studentdata})
-  }
+  // changeName = (event, id) => {
+  //   let student = {...this.state.studentData[id]}
+  //   student.name = event.target.value
+  //   let studentdata = [...this.state.studentData]
+  //   studentdata[id] = student
+  //   this.setState({studentData: studentdata})
+  // }
 
-  changeAge = (event, id) => {
-    let student = {...this.state.studentData[id]}
-    student.usia = event.target.value
-    let studentdata = [...this.state.studentData]
-    studentdata[id] = student
-    this.setState({studentData: studentdata})
+  // changeAge = (event, id) => {
+  //   let student = {...this.state.studentData[id]}
+  //   student.usia = event.target.value
+  //   let studentdata = [...this.state.studentData]
+  //   studentdata[id] = student
+  //   this.setState({studentData: studentdata})
+  // }
+
+  saveEdit = (id) => {
+    let name = this.nameref.current.value
+    let usia = this.usiaref.current.value
+    let student = [...this.state.studentData]
+    student.splice(id,1,{name,usia,isEdit: false})
+    console.log(student)
+    // this.setState({datamurid,indexedit:index})
+    this.setState({studentData: student})
+    this.nameref = React.createRef()
+    this.usiaref = React.createRef()
   }
   
   renderStudentData = () => {
@@ -57,9 +67,13 @@ class App extends React.Component {
         age={val.usia}
         delete={() => this.deleteStudentData(index)}
         edit={() => this.editStudentData(index)} 
-        isedit={val.isEdit} 
-        changename={(event) => this.changeName(event, index)}
-        changeage={(event) => this.changeAge(event, index)}
+        saveedit={() => this.saveEdit(index)}
+        isedit={val.isEdit}
+        refname={this.nameref}
+        refusia={this.usiaref}
+        // changename={(event) => this.changeName(event, index)}
+        // changeage={(event) => this.changeAge(event, index)}
+        // cancelchange={()=> this.cancelChange()}
          />
       )
     })
